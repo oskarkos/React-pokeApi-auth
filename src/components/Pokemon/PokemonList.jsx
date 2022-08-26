@@ -16,7 +16,7 @@ export const PokemonList = ({
 
   if (searchedPokemons.length > 0) {
     return (
-      <div>
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {searchedPokemons.map((item) => {
           return <PokemonCard key={item.id} pokemon={item} />;
         })}
@@ -24,7 +24,7 @@ export const PokemonList = ({
     );
   }
   return (
-    <div>
+    <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
       {pokemonShowingItems &&
         pokemonShowingItems.map((item) => (
           <PokemonCard key={item.id} pokemon={item} />

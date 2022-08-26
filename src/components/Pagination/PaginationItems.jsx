@@ -29,13 +29,14 @@ export const PaginationItems = ({ itemsPerPage }) => {
 
   useEffect(() => {
     if (pokemons.length > 0) {
-      updateCurrentArray();
+      updateCurrentArray(pokemons);
     }
   }, [itemsPerPage, itemOffset, pokemons]);
 
-  const updateCurrentArray = () => {
+  const updateCurrentArray = (pokemonsArray) => {
     const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(pokemons.slice(itemOffset, endOffset));
+    setCurrentItems(pokemonsArray.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(pokemonsArray.length / itemsPerPage));
   };
 
   const handlePageClick = (data) => {
@@ -44,10 +45,10 @@ export const PaginationItems = ({ itemsPerPage }) => {
   };
 
   return (
-    <div>
+    <div className="w-full">
       {!loading ? (
         currentItems && (
-          <div>
+          <div className="w-full flex flex-col items-center gap-6 p-4">
             <InputSearch />
             <PokemonList
               pokemonShowingItems={currentItems}

@@ -5,9 +5,15 @@ export const PokemonStar = ({ isFavorite, onClick }) => {
   return (
     <div onClick={onClick}>
       {isFavorite ? (
-        <FontAwesomeIcon icon="fa-solid fa-star" />
+        <FontAwesomeIcon
+          className="text-[#feca1b] cursor-pointer"
+          icon="fa-solid fa-star"
+        />
       ) : (
-        <FontAwesomeIcon icon="fa-regular fa-star" />
+        <FontAwesomeIcon
+          className="text-[#feca1b] cursor-pointer"
+          icon="fa-regular fa-star"
+        />
       )}
     </div>
   );

@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getPokemons, getPokemonDetails } from "../api";
+import { getPokemons, getPokemonDetails, getPokemonByName } from "../api";
 import { setLoading } from "./uiSlice";
 
 const initialState = {
   pokemons: [],
   pokemonsSearched: [],
+  detailedPokemon: {},
 };
 
 export const fetchPokemonWithDetails = createAsyncThunk(
@@ -15,17 +16,17 @@ export const fetchPokemonWithDetails = createAsyncThunk(
     const pokemonsDetails = await Promise.all(
       AllPokemons.map((item) => getPokemonDetails(item))
     );
-    let pokemones = [];
-    pokemonsDetails.map((elem) => {
-      let {
-        name,
-        id,
-        types,
-        sprites: { front_default },
-      } = elem;
-      pokemones.push({ name, id, types, image: front_default });
-    });
     dispatch(setPokemons(pokemonsDetails));
+    dispatch(setLoading(false));
+  }
+);
+
+export const fetchDetailedPokemon = createAsyncThunk(
+  "data/fetchDetailedPokemon",
+  async (paramPoke, { dispatch }) => {
+    dispatch(setLoading(true));
+    const pokemon = await getPokemonByName(paramPoke);
+    dispatch(setDetailedPokemon(pokemon));
     dispatch(setLoading(false));
   }
 );
@@ -57,9 +58,13 @@ export const dataSlice = createSlice({
         state.pokemonsSearched = [];
       }
     },
+    setDetailedPokemon: (state, action) => {
+      state.detailedPokemon = action.payload;
+    },
   },
 });
 
-export const { setFavorite, setPokemons, setSearch } = dataSlice.actions;
+export const { setFavorite, setPokemons, setSearch, setDetailedPokemon } =
+  dataSlice.actions;
 
 export default dataSlice.reducer;

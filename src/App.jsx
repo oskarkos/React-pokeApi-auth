@@ -3,6 +3,7 @@ import { DETAILS, HOME, LOGIN } from "./config/routes/paths";
 import { Home } from "./views/Home";
 import { Login } from "./views/Login";
 import { Details } from "./views/Details";
+import { NotFound } from "./views/NotFound";
 import { AuthContextProvider } from "./contexts/authContext";
 import { PublicRoutes } from "./components/routes/PublicRoutes";
 import { PrivateRoutes } from "./components/routes/PrivateRoutes";
@@ -19,6 +20,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path={DETAILS} element={<Details />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </AuthContextProvider>

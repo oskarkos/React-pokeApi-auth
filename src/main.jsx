@@ -9,11 +9,28 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import {
+  faStar,
+  faUser,
+  faLock,
+  faArrowRightToBracket,
+  faArrowRightFromBracket,
+  faMagnifyingGlass,
+  faArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarReg } from "@fortawesome/free-regular-svg-icons";
 import rootReducer from "./reducers/rootReducer";
 
-library.add(faStar, faStarReg);
+library.add(
+  faStar,
+  faStarReg,
+  faUser,
+  faLock,
+  faArrowRightToBracket,
+  faArrowRightFromBracket,
+  faMagnifyingGlass,
+  faArrowLeft
+);
 
 const middlewareEnhancer = applyMiddleware(thunk);
 
